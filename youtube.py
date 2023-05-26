@@ -1,9 +1,16 @@
 import streamlit as st
 from pytube import YouTube
+import pytube
+import re
+
+class CustomYouTube(YouTube):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.cipher.var_regex = re.compile(r"^\$*\w+\W")
 
 def download_video(url, output_path):
     try:
-        youtube = YouTube(url)
+        youtube = CustomYouTube(url)
         video = youtube.streams.get_highest_resolution()
         video.download(output_path=output_path)
         st.success("Download completo.")
@@ -25,7 +32,6 @@ def download_videos_from_file(file_path, output_path):
 def main():
     st.title("Download de Vídeos do YouTube")
     st.write("Faça o upload de um arquivo de texto contendo os links dos vídeos do YouTube para iniciar o download.")
-
     file = st.file_uploader("Selecione um arquivo de texto", type=['txt'])
     output_path = st.text_input("Informe o caminho onde os arquivos serão salvos")
 
