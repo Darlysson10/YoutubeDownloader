@@ -16,9 +16,9 @@ pip install streamlit pytube
 
 ## Como executar o aplicativo
 
-1. Faça o clone deste repositório ou baixe o arquivo `main.py` para sua máquina.
+1. Faça o clone deste repositório ou baixe o arquivo `youtube.py` para sua máquina.
 
-2. No diretório em que o arquivo `main.py` está localizado, abra o terminal ou prompt de comando.
+2. No diretório em que o arquivo `youtube.py` está localizado, abra o terminal ou prompt de comando.
 
 3. Execute o seguinte comando para iniciar o aplicativo:
 
