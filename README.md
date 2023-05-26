@@ -4,12 +4,11 @@ This is a Streamlit application for downloading YouTube videos. It allows you to
 
 ## Prerequisites
 
-Make sure you have the following libraries installed:
+Make sure you have the following library installed:
 
 - Streamlit
-- pytube
 
-You can install them by running the following command:
+You can install it by running the following command:
 ```
 pip install streamlit
 ```
