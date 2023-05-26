@@ -1,6 +1,5 @@
 import streamlit as st
 from pytube import YouTube
-import socket
 
 def generate_download_link(url):
     try:
@@ -12,12 +11,12 @@ def generate_download_link(url):
         st.error(f"Ocorreu um erro ao gerar o link de download do vídeo: {str(e)}")
         return None
 
-def download_video(url, output_path):
+def download_video(url, output_path, is_local):
     try:
         download_link = generate_download_link(url)
         if download_link:
             st.markdown(f"Download link: [{download_link}]({download_link})")
-            if is_running_locally():
+            if is_local:
                 youtube = YouTube(url)
                 video = youtube.streams.get_highest_resolution()
                 video.download(output_path=output_path)
@@ -25,7 +24,7 @@ def download_video(url, output_path):
     except Exception as e:
         st.error(f"Ocorreu um erro ao baixar o vídeo: {str(e)}")
 
-def download_videos_from_file(file_path, output_path):
+def download_videos_from_file(file_path, output_path, is_local):
     try:
         with open(file_path, 'r') as file:
             links = file.readlines()
@@ -33,29 +32,25 @@ def download_videos_from_file(file_path, output_path):
             total_videos = len(links)
             for i, link in enumerate(links, start=1):
                 st.write(f"Baixando vídeo {i} de {total_videos}")
-                download_video(link, output_path)
+                download_video(link, output_path, is_local)
     except Exception as e:
         st.error(f"Ocorreu um erro ao ler o arquivo: {str(e)}")
-
-def is_running_locally():
-    ip_address = socket.gethostbyname(socket.gethostname())
-    print(ip_address)
-    return ip_address.startswith('127.') or ip_address.startswith('::1') or ip_address == 'localhost' or ip_address.startswith('192.168.')
 
 def main():
     st.title("Download de Vídeos do YouTube")
     st.write("Faça o upload de um arquivo de texto contendo os links dos vídeos do YouTube para iniciar o download.")
 
     file = st.file_uploader("Selecione um arquivo de texto", type=['txt'])
-    if is_running_locally():
+    is_local = st.checkbox("Estou rodando localmente")
+    if is_local:
         output_path = st.text_input("Informe o caminho onde os arquivos serão salvos")
-
+    
     if file is not None and output_path:
         file_path = file.name
         with open(file_path, 'wb') as f:
             f.write(file.getvalue())
 
-        download_videos_from_file(file_path, output_path)
+        download_videos_from_file(file_path, output_path, is_local)
 
 if __name__ == '__main__':
     main()
