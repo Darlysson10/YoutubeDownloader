@@ -1,16 +1,10 @@
 import streamlit as st
 from pytube import YouTube
 import pytube
-import re
-
-class CustomYouTube(YouTube):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.cipher.var_regex = re.compile(r"^\$*\w+\W")
 
 def download_video(url, output_path):
     try:
-        youtube = CustomYouTube(url)
+        youtube = YouTube(url)
         video = youtube.streams.get_highest_resolution()
         video.download(output_path=output_path)
         st.success("Download completo.")
