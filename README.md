@@ -16,7 +16,7 @@ pip install streamlit
 
 ## How to run the application
 
-1. Clone this repository or download the `youtube.py` file to your machine.
+1. Clone this repository.
 
 2. In the directory where the `youtube.py` file is located, open the terminal or command prompt.
 
