@@ -8,7 +8,7 @@ def generate_download_link(url):
         download_link = video.url
         return download_link
     except Exception as e:
-        st.error(f"Ocorreu um erro ao gerar o link de download do vídeo: {str(e)}")
+        st.error(f"An error occurred while generating the video download link: {str(e)}")
         return None
 
 def download_video(url, output_path):
@@ -16,9 +16,9 @@ def download_video(url, output_path):
         youtube = YouTube(url)
         video = youtube.streams.get_highest_resolution()
         video.download(output_path=output_path)
-        st.success("Download completo.")
+        st.success("Download complete.")
     except Exception as e:
-        st.error(f"Ocorreu um erro ao baixar o vídeo: {str(e)}")
+        st.error(f"An error occurred while downloading the video: {str(e)}")
 
 def download_videos_from_file(file_path, output_path, is_local):
     try:
@@ -27,24 +27,24 @@ def download_videos_from_file(file_path, output_path, is_local):
             links = [link.strip() for link in links if link.strip()]
             total_videos = len(links)
             for i, link in enumerate(links, start=1):
-                st.write(f"Baixando vídeo {i} de {total_videos}")
+                st.write(f"Downloading video {i} of {total_videos}")
                 if is_local and output_path:
                     download_video(link, output_path)
                 else:
                     download_link = generate_download_link(link)
                     if download_link:
-                        st.write(f"Link de download: {download_link}")
+                        st.write(f"Download link: {download_link}")
     except Exception as e:
-        st.error(f"Ocorreu um erro ao ler o arquivo: {str(e)}")
+        st.error(f"An error occurred while reading the file: {str(e)}")
 
 def main():
-    st.title("Download de Vídeos do YouTube")
-    st.write("Faça o upload de um arquivo de texto contendo os links dos vídeos do YouTube para iniciar o download.")
+    st.title("YouTube Video Downloader")
+    st.write("Upload a text file containing the links of YouTube videos to initiate the download.")
     output_path = None
-    file = st.file_uploader("Selecione um arquivo de texto", type=['txt'])
-    is_local = st.checkbox("Estou rodando localmente")
+    file = st.file_uploader("Select a text file", type=['txt'])
+    is_local = st.checkbox("I'm running locally")
     if is_local:
-        output_path = st.text_input("Informe o caminho onde os arquivos serão salvos")
+        output_path = st.text_input("Enter the path where the files will be saved")
     if file is not None:
         file_path = file.name
         with open(file_path, 'wb') as f:
