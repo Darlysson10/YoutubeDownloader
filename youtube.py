@@ -1,6 +1,6 @@
 import streamlit as st
 from pytube import YouTube
-import os
+import socket
 
 def generate_download_link(url):
     try:
@@ -17,7 +17,7 @@ def download_video(url, output_path):
         download_link = generate_download_link(url)
         if download_link:
             st.markdown(f"Download link: [{download_link}]({download_link})")
-            if not os.getenv("STREAMLIT_PRODUCTION"):
+            if is_running_locally():
                 youtube = YouTube(url)
                 video = youtube.streams.get_highest_resolution()
                 video.download(output_path=output_path)
@@ -37,12 +37,17 @@ def download_videos_from_file(file_path, output_path):
     except Exception as e:
         st.error(f"Ocorreu um erro ao ler o arquivo: {str(e)}")
 
+def is_running_locally():
+    ip_address = socket.gethostbyname(socket.gethostname())
+    print(ip_address)
+    return ip_address.startswith('127.') or ip_address.startswith('::1') or ip_address == 'localhost' or ip_address.startswith('192.168.')
+
 def main():
     st.title("Download de Vídeos do YouTube")
     st.write("Faça o upload de um arquivo de texto contendo os links dos vídeos do YouTube para iniciar o download.")
 
     file = st.file_uploader("Selecione um arquivo de texto", type=['txt'])
-    if not os.getenv("STREAMLIT_PRODUCTION"):
+    if is_running_locally():
         output_path = st.text_input("Informe o caminho onde os arquivos serão salvos")
 
     if file is not None and output_path:
