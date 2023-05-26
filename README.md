@@ -1,52 +1,47 @@
-# Download de Vídeos do YouTube
+# YouTube Video Downloader
 
-Este é um aplicativo Streamlit para download de vídeos do YouTube. Permite que você faça o download de vídeos do YouTube fornecendo um arquivo de texto com os links dos vídeos.
+This is a Streamlit application for downloading YouTube videos. It allows you to download videos from YouTube by providing a text file with the video links.
 
-## Pré-requisitos
+## Prerequisites
 
-Certifique-se de ter as seguintes bibliotecas instaladas:
+Make sure you have the following libraries installed:
 
 - Streamlit
 - pytube
 
-Você pode instalá-las executando o seguinte comando:
+You can install them by running the following command:
 ```
-pip install streamlit pytube
+pip install streamlit
 ```
 
-## Como executar o aplicativo
+## How to run the application
 
-1. Faça o clone deste repositório ou baixe o arquivo `youtube.py` para sua máquina.
+1. Clone this repository or download the `youtube.py` file to your machine.
 
-2. No diretório em que o arquivo `youtube.py` está localizado, abra o terminal ou prompt de comando.
+2. In the directory where the `youtube.py` file is located, open the terminal or command prompt.
 
-3. Execute o seguinte comando para iniciar o aplicativo:
+3. Run the following command to start the application:
 
 ```
 streamlit run youtube.py
 ```
 
-4. O aplicativo será aberto em seu navegador padrão.
+4. The application will open in your default browser.
 
-## Como usar o aplicativo
+## How to use the application
 
-1. Após abrir o aplicativo no navegador, você verá um título e uma descrição informando que você deve fazer o upload de um arquivo de texto contendo os links dos vídeos do YouTube para iniciar o download.
+1. After opening the application in the browser, you will see a title and a description instructing you to upload a text file containing the YouTube video links to initiate the download.
 
-2. Clique no botão "Selecione um arquivo de texto" para fazer o upload do arquivo de texto. Certifique-se de que o arquivo de texto contenha um link de vídeo por linha.
+2. Click on the "Select a text file" button to upload the text file. Make sure the text file contains one video link per line.
 
-3. Após selecionar o arquivo de texto, você será solicitado a fornecer o caminho onde os arquivos serão salvos. Digite o caminho completo do diretório em que você deseja salvar os vídeos baixados. Certifique-se de que o caminho seja válido e existente.
+3. After selecting the text file, you will be prompted to provide the path where the files will be saved, if eu check "I'm running locally" box. Enter the full path of the directory where you want to save the downloaded videos. Make sure the path is valid and exists.
 
-4. Após selecionar o arquivo de texto e fornecer o caminho de destino, o download dos vídeos começará automaticamente. O progresso do download será exibido no aplicativo, indicando o número do vídeo atual e o número total de vídeos a serem baixados.
+4. After selecting the text file and providing the destination path, the video download or link generation will start automatically. The progress will be displayed in the application, indicating the current video number and the total number of videos to be downloaded.
 
-5. Após o download de todos os vídeos ser concluído, uma mensagem de sucesso será exibida.
+5. Once all the videos are downloaded, a success message will be displayed.
 
-## Observações
+## Notes
 
-- Certifique-se de ter uma conexão estável com a Internet para que o download dos vídeos seja realizado sem problemas.
+- The application was developed using the `streamlit` library to create the interface.
 
-- Os vídeos são baixados com a maior resolução disponível usando a biblioteca `pytube`.
-
-- O aplicativo foi desenvolvido utilizando a biblioteca `streamlit` para criação da interface.
-
-- Em caso de erros durante o download, uma mensagem de erro será exibida no aplicativo com informações sobre o problema encontrado.
-
+- In case of errors during the download, an error message will be displayed in the application with information about the encountered problem.
