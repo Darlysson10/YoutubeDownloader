@@ -46,6 +46,11 @@ streamlit run youtube.py
 
 - In case of errors during the download, an error message will be displayed in the application with information about the encountered problem.
 
+- You can install the pytube library through pip, but an error occurrs when you try to download. See the following link for more details:
+```
+https://stackoverflow.com/questions/76325815/pytube-error-while-running-in-google-colab/76330331#76330331
+```
+
 ## Online link
 ```
 https://darlysson10-youtubedownloader-youtube-wj6av2.streamlit.app/
