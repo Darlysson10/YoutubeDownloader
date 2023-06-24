@@ -39,13 +39,13 @@ def download_videos_from_file(file_path, output_path, is_local):
 
 def main():
     st.title("YouTube Video Downloader")
-    is_local = st.checkbox("I'm running locally")
+    is_local = st.checkbox("I'm running locally.")
     st.write("Upload a text file containing the links (separated by lines) of YouTube videos to initiate the download.")
     output_path = None
-    file = st.file_uploader("Select a text file", type=['txt'])
+    file = st.file_uploader("Select a text file.", type=['txt'])
  
     if is_local:
-        output_path = st.text_input("Enter the path where the files will be saved")
+        output_path = st.text_input("Enter the path where the files will be saved.")
     if file is not None:
         file_path = file.name
         with open(file_path, 'wb') as f:
