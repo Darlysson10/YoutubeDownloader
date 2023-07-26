@@ -37,10 +37,28 @@ def download_videos_from_file(file_path, output_path, is_local):
     except Exception as e:
         st.error(f"An error occurred while reading the file: {str(e)}")
 
+def download_video_from_links(urls, output_path, is_local):
+    try:
+        total_videos = len(urls)
+        for i, url in enumerate(urls, start=1):
+            st.write(f"Downloading video {i} of {total_videos}")
+            if is_local and output_path:
+                download_video(url, output_path)
+            else:
+                download_link = generate_download_link(url)
+                if download_link:
+                    st.write(f"Download link: {download_link}")
+    except Exception as e:
+        st.error(f"An error occurred while downloading the video: {str(e)}")
+
 def main():
     st.title("YouTube Video Downloader")
     is_local = st.checkbox("I'm running locally.")
     st.write("Upload a text file containing the links (separated by lines) of YouTube videos to initiate the download.")
+    st.write("Alternatively, you can enter the links manually on the text box below.")
+    urls = st.text_area("Enter the links below (separated by lines):")
+    if urls:
+        urls = urls.split('\n')
     output_path = None
     file = st.file_uploader("Select a text file.", type=['txt'])
  
@@ -52,6 +70,8 @@ def main():
             f.write(file.getvalue())
 
         download_videos_from_file(file_path, output_path, is_local)
+    elif urls:
+        download_video_from_links(urls, output_path, is_local)
     
 
 if __name__ == '__main__':
