@@ -1,6 +1,7 @@
 import streamlit as st
-from pytube import YouTube
-
+#from pytube import YouTube
+from pytubefix import YouTube
+from pytubefix.cli import on_progress
 def generate_download_link(url):
     try:
         youtube = YouTube(url)
@@ -15,7 +16,7 @@ def download_video(url, output_path):
     try:            
         youtube = YouTube(url)
         video = youtube.streams.get_highest_resolution()
-        video.download(output_path=output_path)
+        video.download(output_path=output_path, on_progress=on_progress)
         st.success("Download complete.")
     except Exception as e:
         st.error(f"An error occurred while downloading the video: {str(e)}")
